@@ -24,3 +24,11 @@ resource "aws_lambda_function" "stop_notebook" {
 
   depends_on = []
 }
+# AWS lambda permission
+resource "aws_lambda_permission" "allow_cloudwatch_to_call_On_duty" {
+    statement_id = "AllowExecutionFromCloudWatchOn"
+    action = "lambda:InvokeFunction"
+    function_name = "${aws_lambda_function.stop_notebook.function_name}"
+    principal = "events.amazonaws.com"
+    source_arn = "${aws_cloudwatch_event_rule.on_duty.arn}"
+}
