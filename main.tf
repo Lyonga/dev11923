@@ -56,3 +56,18 @@ resource "aws_sns_topic" "sagemaker-topic" {
 }
 EOF
 }
+
+resource "aws_sns_topic_subscription" "sagemaker_topic_subscription" {
+  topic_arn = aws_sns_topic.sagemaker-topic.arn
+  protocol = "email"
+  endpoint = var.your_email
+
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes        = []
+  }
+
+  depends_on = [
+    aws_sns_topic.sagemaker-topic
+  ]
+}
