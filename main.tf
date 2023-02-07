@@ -32,3 +32,26 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_On_duty" {
     principal = "events.amazonaws.com"
     source_arn = "${aws_cloudwatch_event_rule.on_duty.arn}"
 }
+
+resource "aws_sns_topic" "sagemaker-topic" {
+  name              = "${var.account_code}-sns-sagemaker-${var.env}-data-science-${var.domain}-${var.category}-${var.region_code}-${var.az_zone}"
+  delivery_policy   = <<EOF
+{
+  "http": {
+    "defaultHealthyRetryPolicy": {
+      "minDelayTarget": 20,
+      "maxDelayTarget": 20,
+      "numRetries": 3,
+      "numMaxDelayRetries": 0,
+      "numNoDelayRetries": 0,
+      "numMinDelayRetries": 0,
+      "backoffFunction": "linear"
+    },
+    "disableSubscriptionOverrides": false,
+    "defaultThrottlePolicy": {
+      "maxReceivesPerSecond": 1
+    }
+  }
+}
+EOF
+}
