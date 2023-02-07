@@ -23,9 +23,7 @@ resource "aws_lambda_function" "stop_notebook" {
   }
 
   depends_on = []
-<<<<<<< HEAD
 }
-=======
 }
 # AWS lambda permission
 resource "aws_lambda_permission" "allow_cloudwatch_to_call_On_duty" {
@@ -35,4 +33,3 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_On_duty" {
     principal = "events.amazonaws.com"
     source_arn = "${aws_cloudwatch_event_rule.on_duty.arn}"
 }
->>>>>>> dev
