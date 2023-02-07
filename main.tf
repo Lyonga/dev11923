@@ -70,3 +70,8 @@ resource "aws_sns_topic_subscription" "sagemaker_topic_subscription" {
     aws_sns_topic.sagemaker-topic
   ]
 }
+resource "aws_cloudwatch_event_rule" "on_duty" {
+    name = "on_duty"
+    description = "Fires at the beginning of the working day"
+    schedule_expression = "cron(* 12-22/2 * * MON-FRI)"
+}
