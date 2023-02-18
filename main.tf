@@ -24,7 +24,6 @@ resource "aws_lambda_function" "stop_notebook" {
 
   depends_on = []
 }
-}
 # AWS lambda permission
 resource "aws_lambda_permission" "allow_cloudwatch_to_call_On_duty" {
     statement_id = "AllowExecutionFromCloudWatchOn"
