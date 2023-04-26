@@ -21,4 +21,4 @@ jobs:
           git fetch --all
           bash ./delete-stale-branches.sh
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN}}
