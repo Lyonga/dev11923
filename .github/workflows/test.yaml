@@ -1,0 +1,24 @@
+name: Delete Stale Branches
+on:
+  schedule:
+    - cron: "0 12 1 */3 *"
+
+jobs:
+  delete-stale-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Git
+        run: |
+          sudo apt-get update
+          sudo apt-get install git -y
+
+      - name: Delete Stale Branches
+        run: |
+          git remote prune origin
+          git fetch --all
+          bash ./delete-stale-branches.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
