@@ -19,7 +19,7 @@ jobs:
               continue
             fi
             last_commit=$(git log --format="%ct" -n 1 $branch)
-            if (( now - last_commit > 90*24*60*60 )); then
+            if (( now - last_commit > 30*24*60*60 )); then
               if [[ $(git log $branch) == "" ]]; then
                 git push origin --delete $branch
                 echo "Deleted branch $branch"
