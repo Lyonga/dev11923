@@ -1,0 +1,26 @@
+
+name: Stale clean up
+
+on:
+  schedule:
+    - cron: '*/60 * * * *' 
+jobs:
+  get-stale-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get stale branches
+        run: bash ./scripts/fetch.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT}}
+  delete-stale-branches:
+    runs-on: ubuntu-latest
+    needs: get-stale-branches
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Delete stale branches
+        run: bash ./scripts/delete-fetch.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT}}
