@@ -18,4 +18,4 @@ jobs:
           git fetch --all
           bash ./delete-stale-branch.sh
         env:
-          DEL_GITHUB_TOKEN: ${{ secrets.DEL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DEL_GITHUB_TOKEN }}
