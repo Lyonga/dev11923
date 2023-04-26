@@ -11,8 +11,8 @@ for branch in $(git branch -r --no-merged); do
   fi
   # Check if the branch is older than 90 days
   last_commit=$(git log --format="%ct" -n 1 $branch)
-  if (( now - last_commit > 90*24*60*60 )); then
-    # Delete the branch if it has no logs or commits in the last 90 days
+  if (( now - last_commit > 15*24*60*60 )); then
+    # Delete the branch if it has no logs or commits in the last 15 days
     if [[ $(git log $branch) == "" ]]; then
       git push origin --delete $branch
       echo "Deleted branch $branch"
