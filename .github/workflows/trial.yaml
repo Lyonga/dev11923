@@ -12,7 +12,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Delete old branches
         run: |
-          # Run the shell script to delete old branches
+          git remote prune origin
+          git fetch --all
           now=$(date +%s)
           for branch in $(git branch -r --no-merged); do
             if [[ $branch == origin/main* || $branch == origin/dev* || $branch == origin/prod* ]]; then
