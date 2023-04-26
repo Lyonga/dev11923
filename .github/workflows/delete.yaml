@@ -2,7 +2,7 @@ name: Delete Stale Branches
 on:
   schedule:
     # Runs every three months on the first day of the month at 12:00 UTC
-    - cron: '*/30 * * * *'
+    - cron: ''
 
 jobs:
   get-stale-branches:
