@@ -18,7 +18,7 @@ jobs:
         run: |
           ECHO='echo '
           for branch in $(git branch -a | sed 's/^\s*//' | sed 's/^remotes\///' | grep -v 'master$'); do
-            if [[ "$(git log $branch --since "April 01, 2023" | wc -l)" -eq 0 ]]; then
+            if [[ "$(git log --since "April 01, 2023" $branch | wc -l)" -eq 0 ]]; then
               if [[ "$DRY_RUN" = "false" ]]; then
                 ECHO=""
               fi
