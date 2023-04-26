@@ -1,4 +1,4 @@
-name: Testing Stale Branches
+name: Demo removal Stale Branches
 on:
   schedule:
     - cron: "*/15 * * * *"
