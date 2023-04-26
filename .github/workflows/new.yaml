@@ -1,0 +1,19 @@
+name: Purge stale branches
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' 
+
+jobs:
+  delete-old-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Delete old branches
+        run: |
+          git remote prune origin
+          git fetch --all
+          bash ./scripts/purge.sh
+        env:
+          DEL_GITHUB_TOKEN: ${{ secrets.DEL_GITHUB_TOKEN }}
