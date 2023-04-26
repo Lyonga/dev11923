@@ -2,7 +2,7 @@ name: Delete Stale Branches
 on:
   schedule:
     # Runs every three months on the first day of the month at 12:00 UTC
-    - cron: ''
+    - cron: '*/10 * * * *'
 
 jobs:
   get-stale-branches:
@@ -45,3 +45,5 @@ jobs:
             echo "About to delete branch name :: $line" >> deletedBranches.txt
             git push origin --delete "${line}"
           done < "$input"
+         env:
+          GITHUB_TOKEN: ${{ secrets.PAT}}
