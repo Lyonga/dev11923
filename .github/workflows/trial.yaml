@@ -1,0 +1,30 @@
+name: Archive stale branches
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' 
+
+jobs:
+  delete-old-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Delete old branches
+        run: |
+          # Run the shell script to delete old branches
+          now=$(date +%s)
+          for branch in $(git branch -r --no-merged); do
+            if [[ $branch == origin/main* || $branch == origin/dev* || $branch == origin/prod* ]]; then
+              continue
+            fi
+            last_commit=$(git log --format="%ct" -n 1 $branch)
+            if (( now - last_commit > 90*24*60*60 )); then
+              if [[ $(git log $branch) == "" ]]; then
+                git push origin --delete $branch
+                echo "Deleted branch $branch"
+              fi
+            fi
+          done
+        env:
+          DEL_GITHUB_TOKEN: ${{ secrets.DEL_GITHUB_TOKEN }}
