@@ -19,6 +19,6 @@ jobs:
         run: |
           git remote prune origin
           git fetch --all
-          bash ./delete-stale-branches.sh
+          bash ./delete-stale-branch.sh
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN}}
