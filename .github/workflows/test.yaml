@@ -21,6 +21,6 @@ jobs:
           git config --global user.name "Lyonga"
           git remote prune origin
           git fetch --all
-          bash ./scripts/remove.yaml
+          bash ./scripts/remove.sh
         env:
           GITHUB_TOKEN: ${{ secrets.PAT}}
