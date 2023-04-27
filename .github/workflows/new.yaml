@@ -2,7 +2,8 @@ name: Purge stale branches
 
 on:
   schedule:
-    #- cron: '*/30 * * * *' 
+    #- cron: '*/30 * * * *'
+    - cron: '0 11 * * *' 
 
 jobs:
   delete-old-branches:
@@ -16,6 +17,6 @@ jobs:
           git config --global user.name "Lyonga"
           git remote prune origin
           git fetch --all
-          bash ./delete-stale-branch.sh
+          bash ./scripts/test.sh
         env:
           GITHUB_TOKEN: ${{ secrets.DEL_GITHUB_TOKEN }}
