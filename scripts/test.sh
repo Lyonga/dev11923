@@ -16,7 +16,7 @@ OLD_DATE=$(date -I -d "$CURRENT_DATE-$OLD_DAYS days")
 # Get the list of branches that were last updated before the old date
 BRANCHES=$(curl -s -H "Authorization: token DEL_GITHUB_TOKEN" \
   "https://api.github.com/repos/$OWNER/$REPO/branches?per_page=100" | \
-  jq -r '.[] | select(.commit.commit.committer.date < "'$OLD_DATE'") | select(.name != "'$DEFAULT_BRANCH'") | select(.protected != true) | .name'
+  jq -r '.[] | select(.name != "'$DEFAULT_BRANCH'") | select(.protected != true) | select(.commit.committer.date < "'$OLD_DATE'") | select(.updated_at < "'$OLD_DATE'") | .name')
 
 # Delete each branch
 for BRANCH in $BRANCHES; do
