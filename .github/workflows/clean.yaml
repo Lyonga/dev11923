@@ -3,8 +3,7 @@ name: Housekeeping repo cleanup
 
 on:
   schedule:
-    #- cron: '0 16 * * *'
-    - cron: "*/30 * * * *"
+    - cron: "*/15 * * * *"
 
 jobs:
   stale_branches:
