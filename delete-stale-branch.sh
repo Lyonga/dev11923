@@ -7,7 +7,7 @@ for branch in $(git branch -a | sed 's/^\s*//' | sed 's/^remotes\///' | grep -v 
     local_branch_name=$(echo "$branch" | sed 's/remotes\/origin\///')
     if git rev-parse --quiet --verify "origin/$local_branch_name" > /dev/null; then
     echo "Deleting branch $local_branch_name..."
-    git push --delete origin "$local_branch_name"
+    git push --delete origin "$local_branch_name" || true
   fi
   fi
 done
