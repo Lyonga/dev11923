@@ -1,9 +1,9 @@
 
-name: Stale branches
+name: Housekeeping repo cleanup
 
 on:
   schedule:
-    - cron: '0 12 * * *' 
+    - cron: '0 14 * * *' 
 
 jobs:
   stale_branches:
@@ -14,7 +14,7 @@ jobs:
       with:
         repo-token: '${{ secrets.DEL_TOKEN}}'
         days-before-stale: 30
-        days-before-delete: 5 # set to 0 to disable deletion
+        days-before-delete: 35 # set to 0 to disable deletion
         comment-updates: false
         delete: true
         max-issues: 20
@@ -22,3 +22,14 @@ jobs:
         stale-branch-label: 'stale branch 🗑️'
         compare-branches: 'info'
         exclude-branches: 'dev,qa,prod,demo,test*-protected'
+      env:
+        GITHUB_TOKEN: ${{ secrets.DEL_TOKEN}}}
+    - name: Archive to S3
+    uses: jakejarvis/s3-sync-action@master
+    with:
+      args: --exclude "*" --include "*.zip" --delete
+      source_dir: ./stale-repos
+      aws_s3_bucket: webtutorial-103/github
+      aws_s3_region: us-east-1
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
