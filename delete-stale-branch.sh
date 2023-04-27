@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -e
+set -x
+
 git fetch
 for branch in $(git branch -a | sed 's/^\s*//' | sed 's/^remotes\///' | grep -v 'master$'); do
   if [[ "$(git log --since "April 02, 2023" $branch | wc -l)" -eq 0 ]]; then
