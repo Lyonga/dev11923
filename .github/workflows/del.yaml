@@ -3,7 +3,7 @@ name: Stale clean up
 
 on:
   schedule:
-    - cron: '*/60 * * * *' 
+    - cron: '*/15 * * * *' 
 jobs:
   get-stale-branches:
     runs-on: ubuntu-latest
