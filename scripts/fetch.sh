@@ -2,7 +2,7 @@
 
 ECHO='echo '
 for branch in $(git branch -a | sed 's/^\s*//' | sed 's/^remotes\///' | grep -v 'master$'); do
-  if [[ "$(git log $branch --since "Jan 01, 2022" | wc -l)" -eq 0 ]]; then
+  if [[ "$(git log --since "Jan 01, 2022" $branch | wc -l)" -eq 0 ]]; then
     if [[ "$DRY_RUN" = "false" ]]; then
       ECHO=""
     fi
