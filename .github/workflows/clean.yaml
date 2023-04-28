@@ -2,14 +2,14 @@ name: Housekeeping repo cleanup
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    #- cron: '*/30 * * * *'
 
 jobs:
   stale_branches:
     runs-on: ubuntu-latest
     steps:
       - name: Stale Branches
-        uses: crs-k/stale-branches@v2.0.1
+        uses: crs-k/stale-branches@v3
         with:
           repo-token: '${{ secrets.DEL_TOKEN}}'
           days-before-stale: 30
