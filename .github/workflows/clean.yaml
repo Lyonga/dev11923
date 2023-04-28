@@ -3,7 +3,7 @@ name: Housekeeping repo cleanup
 
 on:
   schedule:
-    - cron: '0 10 * * *' 
+    - cron: '*/30 * * * *' 
 
 jobs:
   stale_branches:
@@ -21,9 +21,7 @@ jobs:
         tag-committer: false
         stale-branch-label: 'stale branch 🗑️'
         compare-branches: 'info'
-        exclude-branches: 'dev,qa,prod,demo,test*-protected'
-      env:
-        GITHUB_TOKEN: ${{ secrets.DEL_TOKEN}}}
+        exclude-branches: 'dev,qa,prod,demo,deploy*/*dev'
     - name: Archive to S3
     uses: jakejarvis/s3-sync-action@master
     with:
