@@ -4,7 +4,7 @@ name: Stale clean up
 on:
   schedule:
     #- cron: '*/15 * * * *'
-    - cron: '0 13 * * *' 
+    #- cron: '0 13 * * *' 
     
 jobs:
   get-stale-branches:
