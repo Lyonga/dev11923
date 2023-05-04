@@ -2,7 +2,7 @@ name: Demo removal Stale Branches
 on:
   schedule:
    # - cron: "*/60 * * * *"
-    - cron: "0 13 * * *"
+   # - cron: "0 13 * * *"
 
 jobs:
   delete-stale-branches:
